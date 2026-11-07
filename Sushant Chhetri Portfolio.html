@@ -1,0 +1,730 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Sushant Chhetri Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Hanken+Grotesk:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one big hero where a live network graph runs behind the name; below it, a case-file browser, a scan-style capability block, a dated timeline and a contact strip. */
+:root {
+  --bg: #0A1117;        /* teal-black ground */
+  --bg2: #111C25;       /* raised panel */
+  --fg: #E6EDF2;        /* cold white text */
+  --muted: #8EA0AD;     /* secondary text */
+  --line: #223441;      /* rules and graph edges */
+  --accent: #FFB020;    /* amber phosphor, used for signal only */
+  --accent-ink: #1A1200;
+  --ok: #5FD38D;
+  --sev-crit: #FF6B6B; --sev-high: #FF9A52; --sev-med: #EBCB4B; --sev-low: #5FD38D;
+  --display: "Big Shoulders Display", "Arial Narrow", Impact, sans-serif;
+  --body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "DM Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #EDF1F4; --bg2: #E0E6EB; --fg: #0E1A22; --muted: #50616C; --line: #BFCBD3;
+    --accent: #B05800; --accent-ink: #FFFFFF; --ok: #1E7F46; color-scheme: light;
+    --sev-crit: #B3261E; --sev-high: #A93505; --sev-med: #7A5200; --sev-low: #17693A;
+  }
+}
+:root[data-theme="light"] {
+  --bg: #EDF1F4; --bg2: #E0E6EB; --fg: #0E1A22; --muted: #50616C; --line: #BFCBD3;
+  --accent: #B05800; --accent-ink: #FFFFFF; --ok: #1E7F46; color-scheme: light;
+  --sev-crit: #B3261E; --sev-high: #A93505; --sev-med: #7A5200; --sev-low: #17693A;
+}
+:root[data-theme="dark"] {
+  --bg: #0A1117; --bg2: #111C25; --fg: #E6EDF2; --muted: #8EA0AD; --line: #223441;
+  --accent: #FFB020; --accent-ink: #1A1200; --ok: #5FD38D; color-scheme: dark;
+  --sev-crit: #FF6B6B; --sev-high: #FF9A52; --sev-med: #EBCB4B; --sev-low: #5FD38D;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--body); font-size: 1.0625rem; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  overflow-x: hidden;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); background: var(--bg); z-index: 40; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+.wrap { max-width: 76rem; margin-inline: auto; }
+h1, h2, h3 { font-family: var(--display); font-weight: 800; line-height: .95; margin: 0; text-wrap: balance; letter-spacing: .005em; }
+h2 { font-size: clamp(2.4rem, 6vw, 4.4rem); text-transform: uppercase; }
+p { margin: 0; }
+.mono { font-family: var(--mono); font-size: .8rem; letter-spacing: .02em; }
+
+/* Header */
+.bar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding-inline: max(16px, env(safe-area-inset-left, 0px)); }
+.bar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.5rem; }
+.brand { font-family: var(--display); font-weight: 900; font-size: 1.5rem; text-decoration: none; letter-spacing: .04em; }
+.brand span { color: var(--accent); }
+.nav { display: flex; gap: 1.5rem; }
+.nav a { text-decoration: none; color: var(--muted); font-size: .95rem; padding: .25rem 0; border-bottom: 2px solid transparent; transition: color .2s, border-color .2s; }
+.nav a:hover, .nav a.on { color: var(--fg); border-color: var(--accent); }
+.tools { display: flex; align-items: center; gap: .75rem; }
+.btn { font: inherit; cursor: pointer; border-radius: 999px; padding: .6rem 1.25rem; border: 1px solid var(--line); background: transparent; color: var(--fg); text-decoration: none; display: inline-flex; align-items: center; gap: .5rem; transition: background .2s, border-color .2s, color .2s; font-weight: 500; }
+.btn:hover { border-color: var(--fg); }
+.btn.solid { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); font-weight: 600; }
+.btn.solid:hover { background: var(--fg); border-color: var(--fg); color: var(--bg); }
+.icon-btn { width: 2.5rem; height: 2.5rem; padding: 0; justify-content: center; }
+.icon-btn svg { width: 1.1rem; height: 1.1rem; }
+
+/* Hero */
+.hero { position: relative; padding-block: clamp(3rem, 8vw, 6rem) clamp(2.5rem, 5vw, 4rem); isolation: isolate; }
+.hero canvas { position: absolute; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); z-index: -1; display: block; touch-action: pan-y; }
+.hero-in { display: grid; gap: 2rem; }
+.status { display: inline-flex; align-items: center; gap: .6rem; width: fit-content; padding: .35rem .9rem .35rem .7rem; border: 1px solid var(--line); border-radius: 999px; background: color-mix(in srgb, var(--bg) 70%, transparent); font-size: .9rem; }
+.status i { width: .55rem; height: .55rem; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 0 var(--ok); animation: pulse 2.4s infinite; }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 60%, transparent); } 70%, 100% { box-shadow: 0 0 0 .6rem transparent; } }
+.hero h1 { font-weight: 900; font-size: clamp(4.2rem, 17vw, 13rem); line-height: .82; text-transform: uppercase; letter-spacing: -.005em; }
+.hero h1 span { display: block; }
+.hero h1 .t2 { color: transparent; -webkit-text-stroke: 2px var(--fg); }
+.lead { max-width: 36rem; font-size: clamp(1.05rem, 2vw, 1.25rem); color: var(--fg); }
+.lead em { font-style: normal; color: var(--accent); }
+.cta { display: flex; flex-wrap: wrap; gap: .75rem; }
+.hint { color: var(--muted); font-size: .8rem; }
+.facts { margin: clamp(2.5rem, 6vw, 4.5rem) 0 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; border-top: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 78%, transparent); }
+.facts div { padding: 1.1rem 1rem 1.1rem 0; min-width: 0; }
+.facts div + div { padding-left: 1rem; border-left: 1px solid var(--line); }
+.facts dt { color: var(--muted); font-size: .85rem; }
+.facts dd { margin: .15rem 0 0; font-family: var(--display); font-weight: 800; font-size: clamp(1.25rem, 2.2vw, 1.7rem); line-height: 1.05; text-transform: uppercase; }
+
+/* Sections */
+section { padding-block: clamp(4rem, 9vw, 7.5rem); }
+.sec-head { display: grid; gap: 1rem; margin-bottom: clamp(2rem, 5vw, 3.5rem); max-width: 46rem; }
+.sec-head p { color: var(--muted); }
+
+/* About */
+.modes { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 3vw, 2rem); }
+.mode { background: var(--bg2); padding: clamp(1.5rem, 3vw, 2.25rem); display: grid; gap: 1rem; align-content: start; min-width: 0; border-radius: 4px; }
+.mode h3 { font-size: 2rem; text-transform: uppercase; }
+.mode p { color: var(--muted); max-width: 32rem; }
+.mode ul { margin: 0; padding: 0; list-style: none; display: grid; gap: .5rem; }
+.mode li { display: flex; gap: .75rem; align-items: baseline; }
+.mode li::before { content: ""; flex: none; width: .5rem; height: 2px; background: var(--accent); transform: translateY(-.3em); }
+.mode .tag { align-self: start; }
+
+/* Case files */
+.cases { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: clamp(1.5rem, 4vw, 3.5rem); align-items: start; }
+#caseList { display: grid; border-top: 1px solid var(--line); }
+.row { all: unset; box-sizing: border-box; cursor: pointer; display: grid; grid-template-columns: 1fr auto; gap: .25rem 1rem; align-items: baseline; padding: 1.15rem 0; border-bottom: 1px solid var(--line); transition: padding .25s, color .2s; }
+.row:hover { padding-left: .6rem; }
+.row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.row .code { grid-column: 1 / -1; color: var(--muted); font-family: var(--mono); font-size: .78rem; }
+.row .name { font-family: var(--display); font-weight: 800; font-size: clamp(1.35rem, 2.4vw, 1.8rem); line-height: 1.05; text-transform: uppercase; }
+.row .kind { font-family: var(--mono); font-size: .75rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: .1rem .6rem; white-space: nowrap; }
+.row[aria-current="true"] { padding-left: .9rem; background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 14%, transparent), transparent 70%); }
+.row[aria-current="true"] .name { color: var(--accent); }
+.row[aria-current="true"] .kind { border-color: var(--accent); color: var(--accent); }
+#caseSide { position: sticky; top: 5rem; min-width: 0; }
+#casePanel { background: var(--bg2); border-radius: 4px; padding: clamp(1.5rem, 3vw, 2.25rem); display: grid; gap: 1.25rem; min-width: 0; }
+#casePanel.swap > * { animation: rise .45s cubic-bezier(.2, .7, .2, 1) both; }
+#casePanel.swap > *:nth-child(2) { animation-delay: .05s; } #casePanel.swap > *:nth-child(3) { animation-delay: .1s; } #casePanel.swap > *:nth-child(4) { animation-delay: .15s; }
+@keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.panel-top { display: flex; justify-content: space-between; gap: 1rem; color: var(--muted); }
+.panel-top b { color: var(--accent); font-weight: 500; }
+#casePanel h3 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); text-transform: uppercase; }
+#casePanel p { color: var(--fg); max-width: 38rem; }
+.tags { display: flex; flex-wrap: wrap; gap: .5rem; padding: 0; margin: 0; list-style: none; }
+.tags li { font-family: var(--mono); font-size: .78rem; padding: .25rem .7rem; border: 1px solid var(--line); border-radius: 999px; }
+.note { margin-top: 1.5rem; color: var(--muted); font-size: .95rem; max-width: 34rem; }
+.filters { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.25rem; }
+.chip { font: inherit; font-size: .88rem; cursor: pointer; padding: .3rem .85rem; border-radius: 999px; border: 1px solid var(--line); background: transparent; color: var(--muted); transition: background .2s, color .2s, border-color .2s; }
+.chip:hover { color: var(--fg); border-color: var(--fg); }
+.chip[aria-pressed="true"] { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.chip small { font-family: var(--mono); font-size: .72rem; margin-left: .35rem; opacity: .7; }
+#caseSide #casePanel { max-height: calc(100vh - 6.5rem); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+.finding { border-left: 2px solid var(--accent); padding-left: 1rem; }
+.finding b { display: block; font-family: var(--mono); font-weight: 500; font-size: .76rem; color: var(--accent); margin-bottom: .2rem; }
+.figs { display: grid; grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }
+.fig { background: var(--bg); padding: .8rem .9rem; min-width: 0; }
+.fig b { display: block; font-family: var(--display); font-weight: 800; font-size: 2rem; line-height: 1; color: var(--accent); font-variant-numeric: tabular-nums; }
+.fig span { display: block; margin-top: .3rem; font-size: .82rem; line-height: 1.3; color: var(--muted); }
+.ex { display: grid; gap: .5rem; min-width: 0; }
+.ex-title { font-family: var(--mono); font-size: .76rem; color: var(--muted); }
+.ex-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 3px; background: var(--bg); }
+.ex table { width: 100%; min-width: 30rem; border-collapse: collapse; font-size: .88rem; line-height: 1.4; }
+.ex th { text-align: left; font-family: var(--mono); font-weight: 500; font-size: .72rem; color: var(--muted); padding: .55rem .75rem; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.ex td { padding: .6rem .75rem; border-top: 1px solid var(--line); vertical-align: top; }
+.ex tr:first-child td { border-top: 0; }
+.ex td:first-child { font-weight: 600; }
+.ex td.num { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ex tr.best td { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.pill { display: inline-block; padding: .05rem .55rem; border-radius: 999px; font-family: var(--mono); font-size: .72rem; line-height: 1.5; color: var(--c); background: color-mix(in srgb, var(--c) 16%, transparent); border: 1px solid color-mix(in srgb, var(--c) 45%, transparent); }
+.s-critical { --c: var(--sev-crit); } .s-high { --c: var(--sev-high); } .s-medium { --c: var(--sev-med); } .s-low { --c: var(--sev-low); }
+.ex-note { font-size: .8rem; color: var(--muted); }
+
+/* Capabilities */
+.scan { border: 1px solid var(--line); border-radius: 4px; overflow: hidden; background: var(--bg2); }
+.scan-head { padding: .8rem 1.25rem; border-bottom: 1px solid var(--line); color: var(--muted); display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; }
+.scan-head b { color: var(--accent); font-weight: 500; }
+.scan-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1px; background: var(--line); }
+.group { background: var(--bg2); padding: 1.5rem 1.25rem 1.75rem; display: grid; gap: 1rem; align-content: start; min-width: 0; }
+.group h3 { font-size: 1.6rem; text-transform: uppercase; }
+.group ul { list-style: none; margin: 0; padding: 0; display: grid; gap: .1rem; }
+.group li { padding: .3rem .5rem; margin-inline: -.5rem; border-radius: 3px; color: var(--muted); transition: background .15s, color .15s; font-size: .98rem; }
+.group li:hover { background: color-mix(in srgb, var(--accent) 16%, transparent); color: var(--fg); }
+
+/* Experience */
+.tl { list-style: none; margin: 0; padding: 0 0 0 clamp(1.25rem, 3vw, 2rem); border-left: 1px solid var(--line); display: grid; gap: 2.5rem; }
+.tl li { position: relative; display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: .25rem 2rem; }
+.tl li::before { content: ""; position: absolute; left: calc(-1 * clamp(1.25rem, 3vw, 2rem) - 5px); top: .55rem; width: 9px; height: 9px; border-radius: 50%; background: var(--bg); border: 2px solid var(--accent); }
+.tl .when { color: var(--accent); padding-top: .25rem; }
+.tl h3 { font-size: clamp(1.5rem, 3vw, 2.2rem); text-transform: uppercase; }
+.tl .org { color: var(--muted); }
+.tl p { margin-top: .5rem; max-width: 38rem; }
+.tl .tag { margin-top: .75rem; }
+.tag { display: inline-block; width: fit-content; font-family: var(--mono); font-size: .75rem; padding: .15rem .65rem; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); }
+
+/* Education */
+.edu { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 3vw, 2rem); }
+.deg { padding: clamp(1.5rem, 3vw, 2.25rem); border: 1px solid var(--line); border-radius: 4px; display: grid; gap: .75rem; align-content: start; min-width: 0; }
+.deg.now { background: var(--bg2); }
+.deg h3 { font-size: clamp(1.7rem, 3vw, 2.4rem); text-transform: uppercase; }
+.deg .state { display: inline-flex; align-items: center; gap: .5rem; width: fit-content; color: var(--muted); }
+.deg.now .state { color: var(--accent); }
+.deg .school { color: var(--muted); }
+
+/* Contact */
+.contact { border-top: 1px solid var(--line); }
+.contact h2 { font-size: clamp(2.6rem, 8vw, 6.5rem); max-width: 16ch; }
+.contact .lead { margin-top: 1.5rem; color: var(--muted); }
+.reach { margin-top: clamp(2rem, 5vw, 3.5rem); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.reach-item { display: grid; grid-template-columns: 1fr auto; gap: .25rem 1rem; align-items: center; padding: 1.25rem 1.5rem; background: var(--bg2); border-radius: 4px; min-width: 0; }
+.reach-item small { grid-column: 1 / -1; color: var(--muted); font-family: var(--mono); font-size: .78rem; }
+.reach-item .val { font-size: clamp(1rem, 2vw, 1.3rem); font-weight: 500; overflow-wrap: anywhere; user-select: all; }
+.reach-item .btn { padding: .4rem .9rem; font-size: .9rem; }
+.links { margin-top: 1rem; display: flex; flex-wrap: wrap; gap: .75rem; }
+footer { padding-block: 2rem 3rem; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; color: var(--muted); font-size: .95rem; }
+#toast { position: fixed; left: 50%; bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); background: var(--fg); color: var(--bg); padding: .6rem 1.1rem; border-radius: 999px; font-size: .9rem; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; z-index: 50; }
+#toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+@media (max-width: 900px) {
+  .nav { display: none; }
+  .facts { grid-template-columns: repeat(2, 1fr); }
+  .facts div:nth-child(odd) { padding-left: 0; border-left: 0; }
+  .facts div:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .facts div:last-child { grid-column: 1 / -1; padding-left: 0; border-left: 0; }
+  .modes, .edu, .reach { grid-template-columns: 1fr; }
+  .cases { grid-template-columns: 1fr; }
+  #caseSide { display: none; }
+  #casePanel.inline { margin: 0 0 .5rem; border-radius: 0 0 4px 4px; }
+  .scan-grid { grid-template-columns: 1fr 1fr; }
+  #casePanel.inline { max-height: none; }
+  .group:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  .tl li { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .scan-grid { grid-template-columns: 1fr; }
+  .hero h1 .t2 { -webkit-text-stroke-width: 1.5px; }
+  .btn.hide-s { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .status i { animation: none; }
+  #casePanel.swap > * { animation: none; }
+  .row, .btn, .group li { transition: none; }
+}
+</style>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="Sushant, back to top">SB<span>.</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#about">About</a><a href="#work">Work</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#contact">Contact</a>
+    </nav>
+    <div class="tools">
+      <a class="btn solid hide-s" href="#contact">Get in touch</a>
+      <button class="btn icon-btn" id="theme" type="button" aria-label="Switch colour theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v18" /><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="home">
+  <div class="hero">
+    <canvas id="net" aria-hidden="true"></canvas>
+    <div class="wrap hero-in">
+      <span class="status"><i></i>Adelaide, South Australia. Open to opportunities</span>
+      <h1 aria-label="Sushant builds systems."><span class="t1">Sushant</span><span class="t2">builds</span><span class="t3">systems.</span></h1>
+      <p class="lead"><strong>Information Technology graduate</strong> with practical cybersecurity projects, network-security analysis, penetration-testing labs and real operational leadership. I like understanding how systems fail, and how people depend on them.</p>
+      <div class="cta">
+        <a class="btn solid" href="#work">See the work</a>
+        <a class="btn" href="#contact">Talk to me</a>
+      </div>
+      <p class="hint mono" id="hint">Move your cursor over the network to scan it. Click to send packets.</p>
+    </div>
+    <div class="wrap">
+      <dl class="facts">
+        <div><dt>Bachelor of IT</dt><dd>Completed 2026</dd></div>
+        <div><dt>Cybersecurity</dt><dd>HD 89/100</dd></div>
+        <div><dt>Driver licence</dt><dd>Full, unrestricted</dd></div>
+        <div><dt>Shito-Ryu Karate</dt><dd>Black belt</dd></div>
+        <div><dt>Master of Business Administration</dt><dd>Current</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>One person. Two operating modes.</h2>
+        <p>Technology is where I'm heading. Service work is where I learned to stay useful when things get busy.</p>
+      </div>
+      <div class="modes">
+        <article class="mode">
+          <span class="tag">Technology</span>
+          <h3>Systems and security</h3>
+          <p>I'm building toward IT support, systems and cybersecurity roles. My degree gave me the technical foundation. My projects gave me practical exposure to network risk, privacy, incident thinking and ethical hacking.</p>
+          <ul><li>Network and API security analysis</li><li>Authorised penetration-testing labs</li><li>Risk, incident response and continuity planning</li></ul>
+        </article>
+        <article class="mode">
+          <span class="tag">Operations</span>
+          <h3>People and pressure</h3>
+          <p>Hospitality taught me reliability, communication and ownership. I've led a cellar team through high-volume service, co-founded a martial arts academy and represented students at my institute.</p>
+          <ul><li>Team coordination and handovers</li><li>Customer and stakeholder communication</li><li>Running a small business day to day</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Case files, not filler.</h2>
+        <p>Real projects and supervised labs from my Bachelor of Information Technology. Group work is labelled as group work, and individual analysis is labelled individually. Figures and tables come from my submitted reports. MedSecure and TechSecure are fictional companies.</p>
+      </div>
+      <div class="cases">
+        <div>
+          <div class="filters" id="filters" role="group" aria-label="Filter case files"></div>
+          <div id="caseList" role="list"></div>
+        </div>
+        <div id="caseSide">
+          <article id="casePanel" aria-live="polite"></article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Technical depth. Human range.</h2>
+        <p>I'm early in my IT career, so I don't claim production-level expertise in every tool. These are the areas I have studied, practised in labs, or used in real work.</p>
+      </div>
+      <div class="scan">
+        <div class="scan-head mono"><span><b>$</b> scan capabilities --owner sushant</span><span>5 groups found</span></div>
+        <div class="scan-grid">
+          <div class="group"><h3>Systems and support</h3><ul><li>Windows and Windows 11</li><li>Linux</li><li>VirtualBox</li><li>LAN and WAN fundamentals</li><li>Microsoft Office</li><li>User support and troubleshooting</li><li>Access-control fundamentals</li></ul></div>
+          <div class="group"><h3>Cybersecurity</h3><ul><li>Vulnerability assessment</li><li>Threat analysis</li><li>Risk analysis</li><li>Incident handling concepts</li><li>IAM and authentication</li><li>Firewalls, VPN and IDPS</li><li>Data security and privacy</li></ul></div>
+          <div class="group"><h3>Frameworks and methods</h3><ul><li>NIST CSF 2.0</li><li>ISO/IEC 27001 and 27005</li><li>NIST SP 800-30</li><li>FAIR risk quantification</li><li>Essential Eight</li><li>Australian Privacy Principles</li><li>Agile delivery with Jira</li></ul></div>
+          <div class="group"><h3>Tools and code</h3><ul><li>Wireshark</li><li>Nmap</li><li>Kali Linux</li><li>Metasploit</li><li>Suricata IDS</li><li>fail2ban</li><li>Python and scikit-learn</li><li>PowerShell</li><li>Bash</li><li>Java, C and C++</li></ul></div>
+          <div class="group"><h3>Operations and people</h3><ul><li>Team coordination</li><li>Stakeholder communication</li><li>Customer service</li><li>Project coordination</li><li>Problem solving under pressure</li><li>POS and SevenRooms familiarity</li><li>English, Nepali and Hindi</li></ul></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Where theory met real pressure.</h2>
+        <p>Operations is where I learned reliability, communication and ownership.</p>
+      </div>
+      <ol class="tl">
+        <li><span class="when mono">Sep 2024 to Sep 2026</span><div><h3>Cellar Team Leader</h3><div class="org">Merivale, Coogee Pavilion</div><p>High-volume operations, team workflow, stock readiness, handovers and issue resolution.</p><span class="tag">Operations</span></div></li>
+        <li><span class="when mono">2025 to 2026</span><div><h3>Student Representative and Brand Ambassador</h3><div class="org">SIHE</div><p>Student advocacy, feedback, events, engagement and institute promotion.</p><span class="tag">Leadership</span></div></li>
+        <li><span class="when mono">2023 to 2025</span><div><h3>Co-Founder and Manager</h3><div class="org">Vision Martial Arts Academy</div><p>Day-to-day operations, enquiries, community engagement, customer experience and digital promotion.</p><span class="tag">Leadership</span></div></li>
+        <li><span class="when mono">2022 to 2023</span><div><h3>Marketing and Technical Manager</h3><div class="org">Kenpo Kai Australia</div><p>Website updates, digital communications, social strategy and practical digital improvements.</p><span class="tag">Tech and digital</span></div></li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Foundation built. Still learning.</h2>
+        <p>My BIT was completed in 2026. I'm now studying an MBA while building toward a long-term technology career.</p>
+      </div>
+      <div class="edu">
+        <article class="deg now"><span class="state mono">2026 to 2028, current</span><h3>Master of Business Administration</h3><div class="school">Universal Business School Sydney</div></article>
+        <article class="deg"><span class="state mono">2023 to 2026, completed</span><h3>Bachelor of Information Technology</h3><div class="school">Sydney Institute of Higher Education</div><div>Cybersecurity, High Distinction, 89/100</div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Need someone who understands systems and still talks to people?</h2>
+      <p class="lead">I'm interested in IT support, junior systems, cybersecurity, technical operations and selected hospitality leadership roles.</p>
+      <div class="reach">
+        <div class="reach-item"><small>Email</small><span class="val" id="v-email">sushantbudhathoki2077@gmail.com</span><button class="btn" type="button" data-copy="v-email">Copy</button></div>
+        <div class="reach-item"><small>Phone</small><span class="val" id="v-phone">0405 620 057</span><button class="btn" type="button" data-copy="v-phone">Copy</button></div>
+      </div>
+      <div class="links">
+        <a class="btn solid" href="https://sushantchhetri.netlify.app/assets/Sushant_Budhathoki_Chhetri_IT_Resume.pdf" target="_blank" rel="noopener">Open IT resume</a>
+        <a class="btn" href="https://www.linkedin.com/in/sushant-budhathoki-chhetri-a2b9b4282" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/sushant2077" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="wrap">
+  <footer><span><strong>Sushant Budhathoki Chhetri</strong>, Adelaide, SA</span><a href="#home">Back to top</a></footer>
+</div>
+<div id="toast" role="status"></div>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Theme toggle ---------- */
+  var mqDark = window.matchMedia('(prefers-color-scheme: dark)');
+  try { var saved = localStorage.getItem('sb-theme'); if (saved) root.setAttribute('data-theme', saved); } catch (e) {}
+  function isDark() { var t = root.getAttribute('data-theme'); return t ? t === 'dark' : mqDark.matches; }
+  document.getElementById('theme').addEventListener('click', function () {
+    var next = isDark() ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('sb-theme', next); } catch (e) {}
+    readColors(); if (reduce) draw(0);
+  });
+  mqDark.addEventListener && mqDark.addEventListener('change', function () { readColors(); if (reduce) draw(0); });
+
+  /* ---------- Toast + copy ---------- */
+  var toast = document.getElementById('toast'), tt;
+  function say(msg) { toast.textContent = msg; toast.classList.add('show'); clearTimeout(tt); tt = setTimeout(function () { toast.classList.remove('show'); }, 1800); }
+  document.querySelectorAll('[data-copy]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var el = document.getElementById(b.getAttribute('data-copy')), text = el.textContent.trim();
+      function fallback() {
+        var r = document.createRange(); r.selectNodeContents(el);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        say('Selected. Press copy on your device.');
+      }
+      try { navigator.clipboard.writeText(text).then(function () { say('Copied ' + text); }, fallback); } catch (e) { fallback(); }
+    });
+  });
+
+  /* ---------- Case files ---------- */
+  var AREAS = ['Governance and risk', 'Analysis and strategy', 'Data and AI', 'Hands-on labs'];
+  var cases = [
+    {
+      area: AREAS[0], code: 'BIT316, Capstone 2', kind: 'Academic',
+      title: 'Full risk assessment, incident response and business continuity',
+      text: 'Designed a cybersecurity governance and risk framework for MedSecure Technologies, a fictional Sydney healthcare IT provider that runs electronic health records and telehealth. The work covered asset classification, a segmented network design, a risk register, an incident response plan and a business continuity plan.',
+      finding: 'Seven risks were scored for likelihood and impact, with ransomware rated critical. Recovery targets were set system by system, and the controls were documented with test evidence for the IDS, fail2ban, backups, access control and incident response.',
+      figs: [['7', 'risks scored and ranked'], ['4', 'incident severity tiers'], ['2 h', 'recovery time target for health records']],
+      exhibit: { title: 'MedSecure risk matrix', head: ['Risk', 'Likelihood', 'Impact', 'Risk level'], sev: [1, 2, 3], rows: [
+        ['Ransomware', 'High', 'High', 'Critical'], ['Phishing', 'High', 'High', 'High'], ['Insider threat', 'Medium', 'High', 'High'],
+        ['Human error', 'High', 'Medium', 'High'], ['Outdated systems', 'Medium', 'High', 'High'],
+        ['Cloud misconfiguration', 'Medium', 'Medium', 'Medium'], ['DDoS attack', 'Medium', 'Medium', 'Medium']] },
+      tags: ['NIST CSF 2.0', 'ISO 27001', 'ISO 27005', 'NIST SP 800-30', 'HIPAA', 'APP', 'Suricata', 'fail2ban', 'SIEM', 'AWS S3', 'Azure Backup', 'Jira']
+    },
+    {
+      area: AREAS[0], code: 'BIT340, governance, risk and compliance', kind: 'Individual',
+      title: 'TechSecure cyber risk assessment with FAIR',
+      text: 'Wrote a board-level risk assessment for TechSecure Pty Ltd, a fictional financial services provider. Five threats were identified: phishing, ransomware, insider misuse, credential compromise and third-party suppliers. A qualitative matrix ranked them, then the FAIR model put dollar values on ransomware and phishing.',
+      finding: 'Phishing, ransomware and unauthorised access came out as the top three risks. On the scenario assumptions, ransomware exposure was $150,000 a year, and MFA cut the expected phishing loss from $120,000 to about $48,000 a year.',
+      figs: [['$150k', 'yearly ransomware exposure'], ['$48k', 'phishing loss with MFA, from $120k'], ['5', 'threat scenarios assessed']],
+      exhibit: { title: 'FAIR working', head: ['Scenario', 'Events a year', 'Loss per event', 'Annual exposure'], num: [1, 2, 3], rows: [
+        ['Ransomware', '0.2 (once in 5 years)', '$750,000', '$150,000'],
+        ['Phishing credential theft', '2', '$60,000', '$120,000'],
+        ['Phishing with MFA (60% fewer events)', '0.8', '$60,000', '$48,000']],
+        note: 'Frequencies and losses are assumptions set by the case study.' },
+      tags: ['FAIR', 'Qualitative risk matrix', 'Risk treatment', 'Privacy and compliance', 'Board communication']
+    },
+    {
+      area: AREAS[0], code: 'BIT340, governance, risk and compliance', kind: 'Group',
+      title: 'TechSecure governance and risk strategy',
+      text: 'Group strategy for TechSecure that recommends ISO 27001 as the primary framework, with NIST CSF and the Essential Eight in support. It proposes a three-level governance model (board, cyber risk committee, CISO), five policies mapped to ISO controls and a four-stage incident response approach.',
+      finding: 'The case compared a projected incident cost of up to $1.0 million with a $350,000 to $500,000 investment in governance, and ended with five prioritised actions from the ISO 27001 blueprint to incident response drills.',
+      figs: [['$1.0M', 'projected incident cost'], ['$350-500k', 'estimated GRC investment'], ['5', 'priority actions']],
+      exhibit: { title: 'Risk treatment matrix', head: ['Risk', 'Impact', 'Likelihood', 'Recommended controls', 'Residual'], sev: [1, 2, 4], rows: [
+        ['Phishing attack', 'High', 'High', 'Zero Trust, MFA, automated email filters', 'Medium'],
+        ['Ransomware execution', 'Critical', 'Medium', 'EDR, immutable offline backups', 'Medium'],
+        ['Insider threat', 'High', 'Medium', 'RBAC, privileged access management', 'Medium'],
+        ['System misconfiguration', 'Medium', 'Low', 'Regular vulnerability scans, secure baseline templates', 'Low']] },
+      tags: ['ISO 27001', 'NIST CSF', 'Essential Eight', 'Governance model', 'Incident response', 'Cost-benefit']
+    },
+    {
+      area: AREAS[1], code: 'BIT306, network security', kind: 'Individual',
+      title: 'Optus data breach: technical analysis',
+      text: 'Analysed the 2022 Optus breach through network and API-security concepts, then developed evidence-based recommendations around authentication, Zero Trust, monitoring and Essential Eight alignment.',
+      tags: ['API security', 'Zero Trust', 'Essential Eight']
+    },
+    {
+      area: AREAS[1], code: 'BIT202, cyber security', kind: 'Group',
+      title: 'Medibank cyber security threat report',
+      text: 'Assessed Medibank’s digital exposure to ransomware, data breaches and phishing, using its 2022 breach as the starting point. Covered third-party and outdated-software risk, then recommended technology, access control, cryptography and risk management practices.',
+      finding: 'Recommended end-to-end encryption, MFA across all key systems, EDR, a NIST or ISO 27001 risk framework, regular incident response exercises and a tested disaster recovery strategy.',
+      exhibit: { title: 'Threats and recommended response', head: ['Threat', 'Recommended response'], rows: [
+        ['Ransomware', 'EDR for real-time detection and response, tested disaster recovery'],
+        ['Data breach', 'End-to-end encryption for sensitive information'],
+        ['Phishing', 'MFA on key systems, ongoing awareness training'],
+        ['Insider threat and human error', 'RBAC so staff only see what their role needs, security awareness campaigns']] },
+      tags: ['Ransomware', 'Data breach', 'MFA', 'RBAC', 'Encryption', 'EDR']
+    },
+    {
+      area: AREAS[1], code: 'Security and privacy analysis', kind: 'Academic',
+      title: 'Online banking security and privacy review',
+      text: 'Reviewed a typical online banking system: its layers of defence (MFA, TLS and AES-256 encryption, network segmentation, role-based access), the threats that still get through (phishing, malware, DoS, SQL injection, insiders) and its duties under the Australian Privacy Act, GDPR and PCI DSS.',
+      finding: 'The controls usually exist but are applied weakly: SMS one-time codes, stale permissions, alerts nobody acts on and encryption keys that need better protection. The report argues security is an ongoing business effort, not a finished project.',
+      exhibit: { title: 'Gaps and recommended fixes', head: ['Gap', 'Recommended fix'], rows: [
+        ['SMS one-time codes and reused passwords', 'Phishing-resistant MFA such as FIDO2'],
+        ['Over-broad access and stale permissions', 'Least privilege, regular audits, automated deprovisioning'],
+        ['Noisy alerts that go unanswered', 'Behavioural analytics in the SIEM and automated quarantine'],
+        ['Encryption keys that need stronger protection', 'Hardware security modules for key storage'],
+        ['Collecting more data than needed', 'Data minimisation, tokenisation and masking']] },
+      tags: ['Zero Trust', 'FIDO2', 'Privacy Act 1988', 'PCI DSS', 'Data minimisation']
+    },
+    {
+      area: AREAS[2], code: 'Machine learning and AI, applied project', kind: 'Individual',
+      title: 'Breast tumour classification with four models',
+      text: 'Built and compared logistic regression, a decision tree, an SVM and a neural network on the Breast Cancer Wisconsin dataset (569 samples, 30 features, 212 malignant and 357 benign). Used a stratified 80/20 split and fitted the scaler on training data only, to avoid leakage.',
+      finding: 'Simpler models generalised best. The decision tree reached 100% training accuracy at depth 7 and above but only 91.23% on test data, so depth 3 was chosen. Raising the logistic regression threshold to 0.9166 gave perfect precision, but recall fell to 0.8056.',
+      figs: [['98.25%', 'best test accuracy'], ['0.9954', 'best AUC, logistic regression'], ['569', 'samples, 30 features']],
+      exhibit: { title: 'Test results', head: ['Model', 'Test accuracy', 'Setting'], num: [1], best: [0, 1], rows: [
+        ['Logistic regression', '98.25%', 'AUC 0.9954'],
+        ['SVM, RBF kernel', '98.25%', 'Non-linear kernel'],
+        ['SVM, linear kernel', '97.37%', 'Linear kernel'],
+        ['Neural network', '96.49%', '5 hidden nodes, AUC 0.9927'],
+        ['Decision tree', '93.86%', 'Max depth 3']] },
+      tags: ['Python', 'scikit-learn', 'ROC and AUC', 'Overfitting', 'Threshold tuning']
+    },
+    {
+      area: AREAS[3], code: 'BIT325, penetration testing', kind: 'Group',
+      title: 'DVWA capture the flag challenge',
+      text: 'Worked in a supervised DVWA lab to locate and decode hidden flags through reconnaissance, source inspection, information-disclosure analysis and Base64 decoding.',
+      tags: ['DVWA', 'Web security', 'Recon', 'Base64']
+    },
+    {
+      area: AREAS[3], code: 'Ethical hacking lab', kind: 'Supervised',
+      title: 'Ethical hacking and secure IoT lab',
+      text: 'Conducted authorised lab simulations involving packet analysis, host and service discovery and controlled vulnerability exploration. Also evaluated WordPress access controls and a secure IoT-to-AWS connection.',
+      tags: ['Wireshark', 'Nmap', 'Metasploit', 'AWS and IoT']
+    },
+    {
+      area: AREAS[0], code: 'Cybersecurity assessment', kind: 'Academic',
+      title: 'Network vulnerability assessment',
+      text: 'Evaluated digital infrastructure for threats, vulnerabilities and business risks across authentication, access control, cryptography, firewalls, VPNs and intrusion detection and prevention.',
+      tags: ['Risk analysis', 'Firewalls', 'VPN', 'IDPS']
+    },
+    {
+      area: AREAS[2], code: 'BUS215, innovation and technology', kind: 'Group',
+      title: 'AI and XR global martial arts simulation',
+      text: 'Proposed a FIFA-style global martial arts platform using AI-based motion capture, XR environments and cloud gaming to combine authentic movement, digital training, education and esports.',
+      tags: ['AI motion capture', 'XR', 'Cloud gaming', 'Strategy']
+    }
+  ];
+
+  var list = document.getElementById('caseList'), panel = document.getElementById('casePanel'), side = document.getElementById('caseSide');
+  var filtersEl = document.getElementById('filters');
+  var narrow = window.matchMedia('(max-width: 900px)'), cur = 0, rows = [], area = 'All';
+
+  function el(tag, cls, text) { var n = document.createElement(tag); if (cls) n.className = cls; if (text != null) n.textContent = text; return n; }
+
+  cases.forEach(function (c, i) {
+    var b = el('button', 'row'); b.type = 'button'; b.setAttribute('role', 'listitem');
+    b.appendChild(el('span', 'code', c.code)); b.appendChild(el('span', 'name', c.title)); b.appendChild(el('span', 'kind', c.kind));
+    b.addEventListener('click', function () { show(i, true); });
+    list.appendChild(b); rows.push(b);
+  });
+
+  var chips = {};
+  ['All'].concat(AREAS).forEach(function (a) {
+    var n = a === 'All' ? cases.length : cases.filter(function (c) { return c.area === a; }).length;
+    var b = el('button', 'chip', a); b.type = 'button'; b.setAttribute('aria-pressed', a === 'All' ? 'true' : 'false');
+    b.appendChild(el('small', '', String(n)));
+    b.addEventListener('click', function () { setArea(a); });
+    filtersEl.appendChild(b); chips[a] = b;
+  });
+  function setArea(a) {
+    area = a;
+    Object.keys(chips).forEach(function (k) { chips[k].setAttribute('aria-pressed', k === a ? 'true' : 'false'); });
+    var first = -1;
+    cases.forEach(function (c, i) { var on = a === 'All' || c.area === a; rows[i].hidden = !on; if (on && first < 0) first = i; });
+    if (a !== 'All' && cases[cur].area !== a) show(first, true);
+    else place();
+  }
+
+  function table(ex) {
+    var wrap = el('div', 'ex'); wrap.appendChild(el('div', 'ex-title', ex.title));
+    var sc = el('div', 'ex-scroll'), t = el('table'), thead = el('thead'), hr = el('tr');
+    ex.head.forEach(function (h) { hr.appendChild(el('th', '', h)); }); thead.appendChild(hr); t.appendChild(thead);
+    var tb = el('tbody');
+    ex.rows.forEach(function (r, ri) {
+      var tr = el('tr'); if (ex.best && ex.best.indexOf(ri) > -1) tr.className = 'best';
+      r.forEach(function (v, ci) {
+        var td = el('td');
+        if (ex.sev && ex.sev.indexOf(ci) > -1) td.appendChild(el('span', 'pill s-' + v.toLowerCase(), v));
+        else { td.textContent = v; if (ex.num && ex.num.indexOf(ci) > -1) td.className = 'num'; }
+        tr.appendChild(td);
+      });
+      tb.appendChild(tr);
+    });
+    t.appendChild(tb); sc.appendChild(t); wrap.appendChild(sc);
+    if (ex.note) wrap.appendChild(el('div', 'ex-note', ex.note));
+    return wrap;
+  }
+
+  function show(i, animate) {
+    cur = i; var c = cases[i];
+    rows.forEach(function (r, k) { r.setAttribute('aria-current', k === i ? 'true' : 'false'); });
+    panel.textContent = '';
+    var top = el('div', 'panel-top mono'); top.appendChild(el('span', '', c.code)); top.appendChild(el('b', '', c.kind)); panel.appendChild(top);
+    panel.appendChild(el('h3', '', c.title));
+    panel.appendChild(el('p', '', c.text));
+    if (c.finding) { var f = el('p', 'finding'); f.appendChild(el('b', '', 'What it found')); f.appendChild(document.createTextNode(c.finding)); panel.appendChild(f); }
+    if (c.figs) { var fg = el('div', 'figs'); c.figs.forEach(function (x) { var d = el('div', 'fig'); d.appendChild(el('b', '', x[0])); d.appendChild(el('span', '', x[1])); fg.appendChild(d); }); panel.appendChild(fg); }
+    if (c.exhibit) panel.appendChild(table(c.exhibit));
+    var ul = el('ul', 'tags'); c.tags.forEach(function (t) { ul.appendChild(el('li', '', t)); }); panel.appendChild(ul);
+    panel.classList.remove('swap'); if (animate && !reduce) { void panel.offsetWidth; panel.classList.add('swap'); }
+    panel.scrollTop = 0;
+    place();
+  }
+  function place() {
+    if (narrow.matches) { rows[cur].after(panel); panel.classList.add('inline'); }
+    else { side.appendChild(panel); panel.classList.remove('inline'); }
+  }
+  narrow.addEventListener && narrow.addEventListener('change', place);
+  show(0, false);
+
+  /* ---------- Active nav ---------- */
+  var links = {}; document.querySelectorAll('.nav a').forEach(function (a) { links[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { Object.keys(links).forEach(function (k) { links[k].classList.toggle('on', k === e.target.id); }); } });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    ['about', 'work', 'skills', 'experience', 'contact'].forEach(function (id) { io.observe(document.getElementById(id)); });
+  }
+
+  /* ---------- Hero network ---------- */
+  var cv = document.getElementById('net'), ctx = cv.getContext('2d'), hero = cv.parentElement;
+  var W = 0, H = 0, dpr = 1, nodes = [], edges = [], adj = [], packets = [], mouse = { x: -999, y: -999, on: false };
+  var col = { line: '#223441', fg: '#E6EDF2', muted: '#8EA0AD', accent: '#FFB020' };
+  var named = [
+    { label: 'NETWORK', fx: .60, fy: .16 }, { label: 'IAM', fx: .84, fy: .30 }, { label: 'RECON', fx: .70, fy: .50 },
+    { label: 'OPERATIONS', fx: .92, fy: .62 }, { label: 'PEOPLE', fx: .62, fy: .78 }
+  ];
+  function readColors() {
+    var s = getComputedStyle(root);
+    col.line = s.getPropertyValue('--line').trim() || col.line; col.fg = s.getPropertyValue('--fg').trim() || col.fg;
+    col.muted = s.getPropertyValue('--muted').trim() || col.muted; col.accent = s.getPropertyValue('--accent').trim() || col.accent;
+  }
+  function rng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function build() {
+    var r = hero.getBoundingClientRect(); W = Math.round(window.innerWidth); H = Math.round(r.height);
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = W * dpr; cv.height = H * dpr; cv.style.height = H + 'px'; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var rand = rng(7), count = Math.max(26, Math.min(80, Math.round(W * H / 20000)));
+    nodes = [];
+    var wide = W > 900;
+    named.forEach(function (n) {
+      var fx = wide ? n.fx : .15 + n.fx * .75;
+      nodes.push({ x: fx * W, y: n.fy * H * 0.9 + H * .04, named: n.label, r: 5 });
+    });
+    while (nodes.length < count) {
+      var x = rand() * W, y = rand() * H;
+      var ok = true; for (var i = 0; i < nodes.length; i++) { var dx = nodes[i].x - x, dy = nodes[i].y - y; if (dx * dx + dy * dy < 55 * 55) { ok = false; break; } }
+      if (ok || rand() < .02) nodes.push({ x: x, y: y, r: 1.6 + rand() * 1.4 });
+    }
+    var link = Math.max(95, Math.min(190, W / 6.5));
+    edges = []; adj = nodes.map(function () { return []; });
+    for (var a = 0; a < nodes.length; a++) for (var b = a + 1; b < nodes.length; b++) {
+      var ddx = nodes[a].x - nodes[b].x, ddy = nodes[a].y - nodes[b].y;
+      if (ddx * ddx + ddy * ddy < link * link) { edges.push([a, b]); adj[a].push(b); adj[b].push(a); }
+    }
+    packets = [];
+    for (var k = 0; k < 8; k++) spawn();
+  }
+  function spawn(from) {
+    if (!edges.length) return;
+    var a = from != null ? from : Math.floor(Math.random() * nodes.length);
+    if (!adj[a].length) return;
+    packets.push({ a: a, b: adj[a][Math.floor(Math.random() * adj[a].length)], t: Math.random(), v: .004 + Math.random() * .006, hops: 0, max: 6 + Math.floor(Math.random() * 8) });
+  }
+  function draw(ts) {
+    ctx.clearRect(0, 0, W, H);
+    var heroTop = hero.getBoundingClientRect().top;
+    var mx = mouse.x, my = mouse.y - 0;
+    var near = -1, nd = 1e9;
+    ctx.lineWidth = 1; ctx.strokeStyle = col.line; ctx.globalAlpha = .55;
+    ctx.beginPath();
+    edges.forEach(function (e) { ctx.moveTo(nodes[e[0]].x, nodes[e[0]].y); ctx.lineTo(nodes[e[1]].x, nodes[e[1]].y); });
+    ctx.stroke(); ctx.globalAlpha = 1;
+    /* scan lines from cursor */
+    if (mouse.on) {
+      nodes.forEach(function (n, i) {
+        var dx = n.x - mx, dy = n.y - my, d = Math.sqrt(dx * dx + dy * dy);
+        n.hot = d < 170 ? 1 - d / 170 : 0;
+        if (n.hot > 0) { ctx.strokeStyle = col.accent; ctx.globalAlpha = n.hot * .8; ctx.beginPath(); ctx.moveTo(mx, my); ctx.lineTo(n.x, n.y); ctx.stroke(); }
+        if (n.named && d < nd) { nd = d; near = i; }
+      });
+      ctx.globalAlpha = 1;
+      var pulse = (ts / 900) % 1;
+      ctx.strokeStyle = col.accent; ctx.globalAlpha = .5 * (1 - pulse); ctx.beginPath(); ctx.arc(mx, my, 10 + pulse * 46, 0, 6.283); ctx.stroke(); ctx.globalAlpha = 1;
+    } else nodes.forEach(function (n) { n.hot = 0; });
+    /* nodes */
+    nodes.forEach(function (n, i) {
+      var hot = n.hot || 0;
+      ctx.fillStyle = hot > 0 ? col.accent : (n.named ? col.fg : col.muted);
+      ctx.globalAlpha = n.named ? 1 : .55 + hot * .45;
+      ctx.beginPath(); ctx.arc(n.x, n.y, n.r + hot * 2.5, 0, 6.283); ctx.fill();
+      if (n.named) {
+        ctx.globalAlpha = .6; ctx.strokeStyle = hot > 0 || i === near && mouse.on ? col.accent : col.muted;
+        ctx.beginPath(); ctx.arc(n.x, n.y, 12 + hot * 4, 0, 6.283); ctx.stroke();
+        if (W > 700) { ctx.globalAlpha = (i === near && nd < 220) ? 1 : .6; ctx.fillStyle = (i === near && nd < 220) ? col.accent : col.muted; ctx.font = '500 11px "DM Mono", monospace'; ctx.fillText(n.named, n.x + 20, n.y + 4); }
+      }
+      ctx.globalAlpha = 1;
+    });
+    /* packets */
+    for (var p = packets.length - 1; p >= 0; p--) {
+      var k = packets[p], A = nodes[k.a], B = nodes[k.b];
+      if (!reduce) k.t += k.v;
+      var x = A.x + (B.x - A.x) * Math.min(k.t, 1), y = A.y + (B.y - A.y) * Math.min(k.t, 1);
+      var tx = A.x + (B.x - A.x) * Math.max(k.t - .22, 0), ty = A.y + (B.y - A.y) * Math.max(k.t - .22, 0);
+      var g = ctx.createLinearGradient(tx, ty, x, y); g.addColorStop(0, 'transparent'); g.addColorStop(1, col.accent);
+      ctx.strokeStyle = g; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(tx, ty); ctx.lineTo(x, y); ctx.stroke();
+      ctx.fillStyle = col.accent; ctx.beginPath(); ctx.arc(x, y, 2.6, 0, 6.283); ctx.fill();
+      if (k.t >= 1) {
+        k.hops++; var opts = adj[k.b].filter(function (n) { return n !== k.a; });
+        if (k.hops >= k.max || !adj[k.b].length) { packets.splice(p, 1); continue; }
+        var nxt = opts.length ? opts[Math.floor(Math.random() * opts.length)] : k.a;
+        k.a = k.b; k.b = nxt; k.t = 0;
+      }
+    }
+    ctx.lineWidth = 1;
+  }
+  var raf = 0, running = false, last = 0;
+  function loop(ts) {
+    if (!running) return;
+    if (packets.length < 14 && ts - last > 380) { spawn(); last = ts; }
+    draw(ts); raf = requestAnimationFrame(loop);
+  }
+  function start() { if (!running && !reduce) { running = true; raf = requestAnimationFrame(loop); } }
+  function stop() { running = false; cancelAnimationFrame(raf); }
+  function setPointer(e) { var r = cv.getBoundingClientRect(); mouse.x = e.clientX - r.left - (window.innerWidth - hero.clientWidth) / 2 * 0 ; mouse.y = e.clientY - r.top; mouse.on = true; }
+  hero.addEventListener('pointermove', setPointer);
+  hero.addEventListener('pointerleave', function () { mouse.on = false; });
+  hero.addEventListener('pointerdown', function (e) {
+    setPointer(e);
+    var best = -1, bd = 1e9;
+    nodes.forEach(function (n, i) { var dx = n.x - mouse.x, dy = n.y - mouse.y, d = dx * dx + dy * dy; if (d < bd) { bd = d; best = i; } });
+    if (best >= 0) for (var i = 0; i < 4; i++) spawn(best);
+  });
+  var rz; window.addEventListener('resize', function () { clearTimeout(rz); rz = setTimeout(function () { build(); if (reduce) draw(0); }, 150); });
+  readColors(); build();
+  if (reduce) { packets.forEach(function (p) { p.t = Math.random(); }); draw(0); document.getElementById('hint').hidden = true; }
+  else {
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { es[0].isIntersecting ? start() : stop(); }).observe(hero); else start();
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { build(); });
+  }
+})();
+</script>
+
+</body></html>
